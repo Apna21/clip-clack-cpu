@@ -57,6 +57,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        stage: {
+          fetch: "hsl(var(--stage-fetch))",
+          decode: "hsl(var(--stage-decode))",
+          execute: "hsl(var(--stage-execute))",
+          memory: "hsl(var(--stage-memory))",
+          writeback: "hsl(var(--stage-writeback))",
+        },
+        hazard: {
+          stall: "hsl(var(--hazard-stall))",
+          forward: "hsl(var(--hazard-forward))",
+        },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
       },
       borderRadius: {
         lg: "var(--radius)",
