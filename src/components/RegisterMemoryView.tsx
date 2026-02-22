@@ -5,11 +5,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 interface Register {
   name: string;
   value: string;
+  decimal?: number;
+  isHighlighted?: boolean;
 }
 
 interface MemoryCell {
   address: string;
   value: string;
+  decimal?: number;
+  isHighlighted?: boolean;
 }
 
 interface RegisterMemoryViewProps {
@@ -38,12 +42,15 @@ export const RegisterMemoryView = ({ registers, memory }: RegisterMemoryViewProp
             </TableHeader>
             <TableBody>
               {registers.map((reg, idx) => (
-                <TableRow key={idx}>
-                  <TableCell className="font-mono font-medium">{reg.name}</TableCell>
-                  <TableCell className="text-right font-mono text-muted-foreground">
-                    {reg.value}
-                  </TableCell>
-                </TableRow>
+              <TableRow key={idx} className={reg.isHighlighted ? "bg-primary/10" : undefined}>
+                <TableCell className="font-mono font-medium">{reg.name}</TableCell>
+                <TableCell className="text-right font-mono">
+                  <div className="text-foreground">{reg.value}</div>
+                  {typeof reg.decimal === "number" && (
+                    <div className="text-xs text-muted-foreground">{reg.decimal}</div>
+                  )}
+                </TableCell>
+              </TableRow>
               ))}
             </TableBody>
           </Table>
@@ -59,12 +66,15 @@ export const RegisterMemoryView = ({ registers, memory }: RegisterMemoryViewProp
             </TableHeader>
             <TableBody>
               {memory.map((cell, idx) => (
-                <TableRow key={idx}>
-                  <TableCell className="font-mono font-medium">{cell.address}</TableCell>
-                  <TableCell className="text-right font-mono text-muted-foreground">
-                    {cell.value}
-                  </TableCell>
-                </TableRow>
+              <TableRow key={idx} className={cell.isHighlighted ? "bg-success/10" : undefined}>
+                <TableCell className="font-mono font-medium">{cell.address}</TableCell>
+                <TableCell className="text-right font-mono">
+                  <div className="text-foreground">{cell.value}</div>
+                  {typeof cell.decimal === "number" && (
+                    <div className="text-xs text-muted-foreground">{cell.decimal}</div>
+                  )}
+                </TableCell>
+              </TableRow>
               ))}
             </TableBody>
           </Table>
